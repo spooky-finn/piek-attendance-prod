@@ -1,0 +1,22 @@
+{
+  "name": "piek-attendance",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-modules --es-module-specifier-resolution=node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Loseev",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "graphql": "^16.3.0",
+    "graphql-tag": "^2.12.6",
+    "moment": "^2.29.1",
+    "node-fetch": "^3.2.1",
+    "winston": "^3.6.0",
+    "winston-daily-rotate-file": "^4.6.1"
+  }
+}

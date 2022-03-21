@@ -1,12 +1,24 @@
-import DataPreparation from "./DataPreparation";
+import DataPreparation from './DataPreparation.js';
+import Employee from './Employee.js';
 import 'dotenv/config'
 import fetch from 'node-fetch'
-import Employee from "./Employee";
 
-import GQLTransmitter from "./services/GQLTransmitter";
-import { unix2timestamp} from './utils/time'
-import { logger } from "./utils/logger";
+import GQLTransmitter from "./services/GQLTransmitter.js";
+import { unix2timestamp} from './utils/time.js'
+import { logger } from "./utils/logger.js";
 
+/*
+* Баги
+
+
+* В случае, если последний интервал не имеет отметки времени выхода, 
+* то может так происходить, что при следующем запуске программы некоторые интервалы будут добавлены в хасуру дважды
+* Сценрарий вполне вероятный, но думаю не критичный
+
+Решения:
+1) Сделать уникальным точку входа, чтобы не залетали дублирующие интервалы
+2) Ограничить отправку интервала, если он последний и не имеет отметки выхода (отправим с следующйи раз)
+*/
 async function employeeSinc(employees){
     const current_employess = employees.map(each => each?.card)
 
@@ -59,6 +71,8 @@ async function inserIntervals(employees){
     }))
 
     const responce = await GQLTransmitter.inserIntervals({ objects: intervals_pool})
+    console.log(responce);
+
     logger.info(`Injected ${responce.length} intervals at ${new Date()}`);
     return responce
 }
@@ -80,9 +94,9 @@ async function main(){
 
 main()
 
-setInterval( function(){
-main()
-}, process.env.SYNC_INTERVAL)
+// setInterval( function(){
+// main()
+// }, process.env.SYNC_INTERVAL)
 
 
 

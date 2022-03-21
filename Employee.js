@@ -1,5 +1,5 @@
-import { unix2timestamp } from "./utils/time"
-import { detaillog } from "./utils/logger"
+import { unix2timestamp } from "./utils/time.js"
+import { detaillog } from "./utils/logger.js"
 
 class Employee {
 
@@ -128,14 +128,21 @@ class Employee {
     _logDetails(){
         detaillog.info('-'.repeat(80))
         detaillog.info(`${this.firstname} ${this.lastname} ${this.card}`)
-        detaillog.info('Events after anticollision procedure and indeterminate sampling:')
+        detaillog.info('||  Original (unmodified events) ||')
+        for( const event of this.unmodified_events){
+            var copy_event = Object.assign({}, event);
+            copy_event.time = unix2timestamp(event.time)
+            detaillog.info(JSON.stringify(copy_event))
+        }
+
+        detaillog.info('|| Events after anticollision procedure and indeterminate sampling ||')
         for( const event of this.events){
             var copy_event = Object.assign({}, event);
             copy_event.time = unix2timestamp(event.time)
             detaillog.info(JSON.stringify(copy_event))
         }
 
-        detaillog.info('finally intervlas: ')
+        detaillog.info('|| finally intervlas ||')
         for (const intr of this.intervals){
             var copy_intr = Object.assign({}, intr);
             copy_intr.ent = unix2timestamp(copy_intr.ent)

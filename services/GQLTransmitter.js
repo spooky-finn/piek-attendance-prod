@@ -1,8 +1,8 @@
-import { request } from './request';
-import { GET_LATEST_EVENT_TIMESTAMP, GET_USERS, INSERT_INTERVALS_OBJECT, INSERT_USERS_OBJECT } from './queries'
+import { request } from './request.js';
+import { GET_LATEST_EVENT_TIMESTAMP, GET_USERS, INSERT_INTERVALS_OBJECT, INSERT_USERS_OBJECT } from './queries.js'
 import 'dotenv/config'
-import { timestamp2unix } from '../utils/time'
-import { logger } from '../utils/logger';
+import { timestamp2unix } from '../utils/time.js'
+import { logger } from '../utils/logger.js';
 
 class GQLTransmitter {
 

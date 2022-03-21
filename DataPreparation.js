@@ -2,11 +2,11 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import 'dotenv/config'
 
-import { timestamp2unix } from './utils/time';
-import { parse_cvs_file } from './utils/csv';
+import { timestamp2unix } from './utils/time.js';
+import { parse_cvs_file } from './utils/csv.js';
 
-import GQLTransmitter from './services/GQLTransmitter'
-import { logger } from './utils/logger';
+import GQLTransmitter from './services/GQLTransmitter.js'
+import { logger } from './utils/logger.js';
 
 export default class DataPreparation {
 

@@ -1,14 +1,17 @@
-import { unix2timestamp } from "./utils/time.js"
+import { timestamp2unix, unix2timestamp } from "./utils/time.js"
 import { detaillog } from "./utils/logger.js"
+import 'dotenv/config'
 
 class Employee {
 
-    constructor(firstname, lastname, card, sampled_events, time_since) {
+    constructor(firstname, lastname, card, sampled_events, latest_mark) {
         this.firstname = firstname
         this.lastname = lastname
         this.card = card
         this.unmodified_events = sampled_events
-        this._time_since = time_since
+
+        // The object consist an timestampst of latest exit and entrance(on case if latest)
+        this._latest_mark = latest_mark
 
         this.events = []
         this.intervals = []
@@ -81,7 +84,16 @@ class Employee {
     }
 
     async intermediateSampling(){
-        this.events = this.events.filter(each => each.time > this._time_since)
+        const latest_timestamps = this._latest_mark.intervals[0]
+        var since = 0;
+
+        if (latest_timestamps?.ext)
+            since = timestamp2unix(latest_timestamps?.ext, process.env.HASURA_DATE_FORMAT)
+        else if (latest_timestamps?.ent)
+            since = timestamp2unix(latest_timestamps?.ent, process.env.HASURA_DATE_FORMAT)
+
+        
+        this.events = this.events.filter(each => each.time > since)
     }
 
     /* 

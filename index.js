@@ -7,18 +7,7 @@ import GQLTransmitter from "./services/GQLTransmitter.js";
 import { unix2timestamp} from './utils/time.js'
 import { logger } from "./utils/logger.js";
 
-/*
-* Баги
 
-
-* В случае, если последний интервал не имеет отметки времени выхода, 
-* то может так происходить, что при следующем запуске программы некоторые интервалы будут добавлены в хасуру дважды
-* Сценрарий вполне вероятный, но думаю не критичный
-
-Решения:
-1) Сделать уникальным точку входа, чтобы не залетали дублирующие интервалы
-2) Ограничить отправку интервала, если он последний и не имеет отметки выхода (отправим с следующйи раз)
-*/
 async function employeeSinc(employees){
     const current_employess = employees.map(each => each?.card)
 
@@ -82,10 +71,12 @@ async function main(){
     const time_since = await GQLTransmitter.getLatestEventTimestamp()
     const { sampled_events, employees_list } = await DataPreparation.getPreparedData();
     
+    const latestsTimestamps = await GQLTransmitter.getLatestTimestampForEach();
+    
     var employees = employees_list.map(each => new Employee(
             each.firstname, each.lastname, each.card,
             sampled_events.filter(event => each.card === event.card),
-            time_since
+            latestsTimestamps.find( item => item.card === each.card)
     ));
    
     employeeSinc(employees)

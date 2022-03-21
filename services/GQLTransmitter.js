@@ -1,5 +1,5 @@
 import { request } from './request.js';
-import { GET_LATEST_EVENT_TIMESTAMP, GET_USERS, INSERT_INTERVALS_OBJECT, INSERT_USERS_OBJECT } from './queries.js'
+import { GET_LATEST_EVENT_TIMESTAMP, GET_LATEST_TIMESTAMP_FOR_EACH, GET_USERS, INSERT_INTERVALS_OBJECT, INSERT_USERS_OBJECT } from './queries.js'
 import 'dotenv/config'
 import { timestamp2unix } from '../utils/time.js'
 import { logger } from '../utils/logger.js';
@@ -59,6 +59,18 @@ class GQLTransmitter {
                 throw new Error(JSON.stringify(res.errors));
 
             return res.data.insert_attendance_intervals.returning
+        } catch (err) {
+            logger.error(`Hasura bad responce ${err}`);
+        }
+    }
+
+    static async getLatestTimestampForEach(){
+        try {
+            const res = await request(GET_LATEST_TIMESTAMP_FOR_EACH);
+            if (res.errors)
+                throw new Error(JSON.stringify(res.errors));            
+
+            return res.data.attendance_users_aggregate.nodes
         } catch (err) {
             logger.error(`Hasura bad responce ${err}`);
         }

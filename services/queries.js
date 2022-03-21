@@ -41,3 +41,17 @@ mutation pushIntervals($objects: [attendance_intervals_insert_input!]!) {
   }
 }
 `
+
+export const GET_LATEST_TIMESTAMP_FOR_EACH = `
+query MyQuery {
+  attendance_users_aggregate {
+    nodes {
+      card
+      intervals(order_by: {id: desc}, limit: 1) {
+        ent
+        ext
+      }
+    }
+  }
+}
+`

@@ -55,7 +55,7 @@ class Employee {
 
         const timedelta = Math.abs(next.time - curr.time)
             // 300 seconds a non-sensitive time for double  marks.
-        if (timedelta < 300)
+        if (timedelta < 900)
             return this._r_preventCollision(arr, idx + 1)
         else
             return idx;

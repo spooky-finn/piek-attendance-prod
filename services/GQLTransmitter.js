@@ -21,6 +21,8 @@ class GQLTransmitter {
             // if we didnt have at least one event with this database name
             if (!timestamp) timestamp = 0;
             logger.info(`Recived the timestamp of latest event ${timestamp}`)
+            logger.info(`Gql Endpoint is ${process.env.GRAPHQL_ENDPOINT}`)
+            
             return timestamp2unix(timestamp, process.env.HASURA_DATE_FORMAT)
         } catch (err) {
             logger.error(`Hasura bad responce ${err}`);

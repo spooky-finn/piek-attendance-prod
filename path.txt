@@ -1,1 +1,1 @@
-/Users/fin/Documents/access.mdb
+C:\Users\Миша\Documents\access.mdb

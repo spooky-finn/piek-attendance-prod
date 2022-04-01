@@ -82,12 +82,12 @@ export default class DataPreparation {
                 {
                     name: 'users',
                     result_path: DataPreparation.resources.users,
-                    command: `${".\mdbtools-win-master\mdb-export"} ${access_path}  USERINFO > `,
+                    command: `${"./mdbtools-win-master/mdb-export"} ${access_path}  USERINFO > `,
                 },
                 {
                     name: 'events',
                     result_path: DataPreparation.resources.events,
-                    command: `${".\mdbtools-win-master\mdb-export"} ${access_path}  acc_monitor_log > `,
+                    command: `${"./mdbtools-win-master/mdb-export"} ${access_path}  acc_monitor_log > `,
                 }
             ]
             for (const file of files){

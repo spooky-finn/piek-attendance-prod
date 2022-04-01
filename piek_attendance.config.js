@@ -1,6 +1,6 @@
 import 'dotenv/config'
 
-export const config = {
+module.exports = {
     apps: [
         {
             name : 'piek_attendance',

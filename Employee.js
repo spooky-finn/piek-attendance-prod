@@ -1,5 +1,5 @@
 import { timestamp2unix, unix2timestamp } from "./utils/time.js"
-import { detaillog } from "./utils/logger.js"
+import { detaillog, logger } from "./utils/logger.js"
 import 'dotenv/config'
 
 class Employee {
@@ -12,9 +12,6 @@ class Employee {
 
         // The object consist an timestampst of latest exit and entrance(on case if latest)
         this._latest_mark = latest_mark
-
-        if (!latest_mark.intervals[0]) 
-            this._latest_mark = { ent: 0, ext: 0}
 
         this.events = []
         this.intervals = []
@@ -87,7 +84,15 @@ class Employee {
     }
 
     async intermediateSampling(){
-        const latest_timestamp = this._latest_mark.intervals[0]
+        var latest_timestamp = undefined;
+
+        try {
+            latest_timestamp = this._latest_mark.intervals[0] || {}
+        } catch (e){
+            logger.error(e)
+            this._latest_mark.intervals[0] = { ent: 0, ext: 0}
+        }
+        
         var since = 0;
 
         if (latest_timestamp?.ext)

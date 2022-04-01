@@ -90,7 +90,9 @@ class Employee {
             latest_timestamp = this._latest_mark.intervals[0] || {}
         } catch (e){
             logger.error(e)
-            this._latest_mark.intervals[0] = { ent: 0, ext: 0}
+            this._latest_mark = {
+                intervals: [ {ext: 0, ent: 0} ]
+            }
         }
         
         var since = 0;

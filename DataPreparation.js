@@ -81,18 +81,18 @@ export default class DataPreparation {
                 {
                     name: 'users',
                     result_path: DataPreparation.resources.users,
-                    command: ".\mdbtools-win-master\mdb-export " + access_path + " USERINFO > ",
+                    command: '".\mdbtools-win-master\mdb-export" ' + access_path + ' USERINFO > ',
                 },
                 {
                     name: 'events',
                     result_path: DataPreparation.resources.events,
-                    command: ".\mdbtools-win-master\mdb-export " + access_path + " acc_monitor_log > ",
+                    command: '".\mdbtools-win-master\mdb-export" ' + access_path + ' acc_monitor_log > ',
                 }
             ]
             for (const file of files){
 
                 try {
-                    const stdout = execSync(file.command + file.result_path)
+                    const stdout = execSync(file.command + file.result_path, { encoding: 'utf-8'})
                     logger.info(`Successfuly created file: ${file.result_path}`, stdout)
                 } catch (e) {
                     logger.error(e);

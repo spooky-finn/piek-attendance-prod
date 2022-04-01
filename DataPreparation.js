@@ -79,6 +79,7 @@ export default class DataPreparation {
 
         try {
             const access_path = fs.readFileSync('./path.txt', 'utf-8').split('\n')[0].trim();
+            logger.info(`Path to mdb database is ${access_path}`)
             const mdb_export = isWin ? '"./mdbtools-win/mdb-export"' : "mdb-export"
             
             const files = [

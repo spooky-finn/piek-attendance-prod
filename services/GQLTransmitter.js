@@ -64,6 +64,7 @@ class GQLTransmitter {
         }
     }
 
+    // Получаем лист всех сотрудников, где для каждого находится послдений его интервал
     static async getLatestTimestampForEach(){
         try {
             const res = await request(GET_LATEST_TIMESTAMP_FOR_EACH);

@@ -1,1 +1,1 @@
-C:\Program Files\БД ТАЙМФОРМЕР\access.mdb
+C:\Program Files\Timeformer\access.mdb

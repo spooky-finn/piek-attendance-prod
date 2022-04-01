@@ -1,6 +1,6 @@
 import 'dotenv/config'
 
-module.exports = {
+export default {
     apps: [
         {
             name : 'piek_attendance',

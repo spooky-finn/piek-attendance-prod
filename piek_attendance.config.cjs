@@ -1,6 +1,7 @@
-import 'dotenv/config'
+const dotenv = require('dotenv');
+dotenv.config({ path: `../.env` });
 
-export default {
+module.exports = {
     apps: [
         {
             name : 'piek_attendance',

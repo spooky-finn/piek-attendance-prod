@@ -75,18 +75,22 @@ export default class DataPreparation {
     }
 
     static async _transformDatabasetoCSV(){
+        var isWin = process.platform === "win32";
+
         try {
-            const access_path = fs.readFileSync('./path.txt', 'utf-8').split('\n')[0];
+            const access_path = fs.readFileSync('./path.txt', 'utf-8').split('\n')[0].trim();
+            const mdb_export = isWin ? '"./mdbtools-win/mdb-export"' : "mdb-export"
+            
             const files = [
                 {
                     name: 'users',
                     result_path: DataPreparation.resources.users,
-                    command: "mdb-export " + access_path + " USERINFO > ",
+                    command: `${mdb_export} ${access_path} USERINFO > `,
                 },
                 {
                     name: 'events',
                     result_path: DataPreparation.resources.events,
-                    command: "mdb-export " + access_path + " acc_monitor_log > ",
+                    command: `${mdb_export} ${access_path} acc_monitor_log > `,
                 }
             ]
             for (const file of files){

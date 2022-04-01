@@ -97,7 +97,7 @@ export default class DataPreparation {
             for (const file of files){
 
                 try {
-                    const stdout = execSync(file.command + file.result_path)
+                    const stdout = execSync(file.command + file.result_path, { encoding: 'utf-8'})
                     logger.info(`Successfuly created file: ${file.result_path}`, stdout)
                 } catch (e) {
                     logger.error(e);

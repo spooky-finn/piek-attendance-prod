@@ -13,6 +13,9 @@ class Employee {
         // The object consist an timestampst of latest exit and entrance(on case if latest)
         this._latest_mark = latest_mark
 
+        if (!latest_mark.intervals[0]) 
+            this._latest_mark = { ent: 0, ext: 0}
+
         this.events = []
         this.intervals = []
 
@@ -84,13 +87,13 @@ class Employee {
     }
 
     async intermediateSampling(){
-        const latest_timestamps = this._latest_mark.intervals[0]
+        const latest_timestamp = this._latest_mark.intervals[0]
         var since = 0;
 
-        if (latest_timestamps?.ext)
-            since = timestamp2unix(latest_timestamps?.ext, process.env.HASURA_DATE_FORMAT)
-        else if (latest_timestamps?.ent)
-            since = timestamp2unix(latest_timestamps?.ent, process.env.HASURA_DATE_FORMAT)
+        if (latest_timestamp?.ext)
+            since = timestamp2unix(latest_timestamp?.ext, process.env.HASURA_DATE_FORMAT)
+        else if (latest_timestamp?.ent)
+            since = timestamp2unix(latest_timestamp?.ent, process.env.HASURA_DATE_FORMAT)
 
         
         this.events = this.events.filter(each => each.time > since)

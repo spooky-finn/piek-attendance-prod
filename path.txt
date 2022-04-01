@@ -1,1 +1,1 @@
-/Users/fin/Documents/access.mdb
+C:\Program Files\БД ТАЙМФОРМЕР\access.mdb

@@ -85,6 +85,6 @@ async function main(){
 
 main()
 
-// setInterval( function(){
-// main()
-// }, process.env.SYNC_INTERVAL)
+setInterval( function(){
+main()
+}, process.env.SYNC_INTERVAL)

@@ -1,8 +1,8 @@
 ## About integration module and our task
 This integration module allows you to view the working time statistics of companies employess for make a reports. The some few a ZK Access controllers was placed in the our objects. One controller has only one smart-card reader. For this reason, we are trying to determine the type of event (it was the entrance of employee, or exit) in this algorithm. Determination idea will be revealated a little later.
  
- ###### Convertin database
-  To convers so oldest Microsoft database lice and Access.mdb used an mdb-tools (aviable for linux and windows).
+ ### Convertin database
+  To convert so oldest Microsoft database as Access was used mdb-tools (aviable for linux and windows).
 
 ## Production configure
 

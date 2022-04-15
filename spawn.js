@@ -2,7 +2,8 @@ import { exec, execSync, spawn } from 'child_process';
 import fs from 'fs';
 import 'dotenv/config'
 
-var isWin = process.platform === "win32";
+function main(){
+    var isWin = process.platform === "win32";
 
     const access_path = fs.readFileSync('./path.txt', 'utf-8').split('\n')[0].trim();
     const mdb_export = isWin ? '"./mdbtools-win/mdb-export"' : "mdb-export"
@@ -18,3 +19,8 @@ var isWin = process.platform === "win32";
             console.log('success');
     })
 
+
+}
+
+
+setInterval(main, 10000)

@@ -127,3 +127,4 @@ dist
 .pnp.*
 resources/users.csv
 resources/events.csv
+*.csv

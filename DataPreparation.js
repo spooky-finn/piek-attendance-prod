@@ -101,7 +101,6 @@ export default class DataPreparation {
                     logger.info(`Successfuly created file: ${file.result_path}`, stdout)
                 } catch (e) {
                     logger.error(e);
-                    process.exit(1);
                 }
             }
 
